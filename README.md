@@ -57,6 +57,28 @@ The code missed out on the `jwt.verify`
 
 Source: [Strapi Open Source issues](https://www.ghostccamm.com/blog/multi_strapi_vulns/)
 
+
+### 2. Somtimes using `X-HTTP-Method-Override` can be used to bypass JWT checks
+
+ESPv2 contains an authentication bypass vulnerability. API clients can craft a malicious X-HTTP-Method-Override header value to bypass JWT authentication in specific cases.
+
+**X-HTTP-Method-Override**
+
+In certain situations (for example, when the service or its consumers are behind an overzealous corporate firewall, or if the main consumer is a web page), only the GET and POST HTTP methods might be available. In such a case, it is possible to emulate the missing verbs by passing the` X-HTTP-Method-Override` header in requests.
+
+For example, an API client can send a `PUT` request over `POST` via the following request:
+
+```bash!
+curl --request POST \
+     --header "X-HTTP-Method-Override: PUT" \
+     --header "Content-Type: application/json" \
+     --data '{"username":"xyz"}' \
+     https://my-endpoint.com/api
+```
+
+Source: [JWT authentication bypass via `X-HTTP-Method-Override` header](https://github.com/GoogleCloudPlatform/esp-v2/security/advisories/GHSA-6qmp-9p95-fc5f)
+
+
 ## SSTI
 
 ### 1. Check for templates if they are using templates
