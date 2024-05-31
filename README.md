@@ -5,6 +5,7 @@
 1. [CSRF](##CSRF)
 2. [Authentication & Authorization issues](##Auth)
 3. [SSTI](##SSTI)
+4. [WAF](##WAF)
 
 
 [CheckList](##CheckList)
@@ -87,6 +88,14 @@ This is usually easy to find with emails, or custom text being rendered with use
 Source: [Strapi Open Source issues](https://www.ghostccamm.com/blog/multi_strapi_vulns/)
 
 ---
+
+## WAF
+
+### 1. Check for the Size limit [Source](https://youtu.be/0OMmWtU2Y_g?si=T3z29bxwLyGWkuug&t=923)
+Adding addtional bytes can bloat the size of the request and traditional WAFs won't inspect it. A burp tool which we can use [noWafPls](https://github.com/assetnote/nowafpls)
+
+There isn't exactly a defense, just make sure to have logging enabled, and look for queries which might be exceptionally large or out of the ordinary.
+
 
 ## CheckList
 
